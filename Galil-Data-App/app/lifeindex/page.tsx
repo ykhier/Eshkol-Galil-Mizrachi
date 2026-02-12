@@ -22,12 +22,6 @@ export default function LifeIndexPage() {
             <TabsTrigger value="current" className="px-6">
               זרקור
             </TabsTrigger>
-            <TabsTrigger value="comparison" className="px-6">
-              השוואה לסקר חברתי
-            </TabsTrigger>
-            <TabsTrigger value="research" className="px-6">
-              תחקור
-            </TabsTrigger>
           </TabsList>
 
           {/* CURRENT TAB */}

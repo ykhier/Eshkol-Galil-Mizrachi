@@ -15,6 +15,7 @@
 
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
+import { useIsMobile } from "@/hooks/use-mobile";
 import TrendChartCard from "@/components/ui/TrendChartCard";
 
 type Point = { x: number | string; y: number };
@@ -22,6 +23,7 @@ type Series = { name: string; points: Point[] };
 
 export default function TrendUnifiedChart() {
   const sp = useSearchParams();
+  const isMobile = useIsMobile();
 
   // EN DOC:
   // The "year" comes from the URL query params because SideFilterPanel updates it:
@@ -102,6 +104,21 @@ export default function TrendUnifiedChart() {
     yearParam && yearParam !== "none"
       ? `שנים ${startYear} - ${endYear}`
       : `שנים 2002 - ${endYear}`;
+
+  if (isMobile) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center text-center">
+          <p className="text-lg font-semibold text-muted-foreground mb-2">
+            Charts not available on mobile
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Please use the desktop version to view the graphs
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

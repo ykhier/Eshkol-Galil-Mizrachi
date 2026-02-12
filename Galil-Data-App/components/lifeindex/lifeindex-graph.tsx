@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import {Bar} from "react-chartjs-2";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {useIsMobile} from "@/hooks/use-mobile";
 import type {LifeIndexFiltersState} from "./lifeindex-filter";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
@@ -34,6 +35,7 @@ const LIFE_INDEX_CHART = {
 };
 
 export function LifeIndexGraph({filters}: {filters: LifeIndexFiltersState}) {
+  const isMobile = useIsMobile();
   const barData: ChartData<"bar"> = useMemo(
     () => ({
       labels: LIFE_INDEX_CHART.labels,
@@ -70,6 +72,21 @@ export function LifeIndexGraph({filters}: {filters: LifeIndexFiltersState}) {
       },
     },
   };
+
+  if (isMobile) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center text-center">
+          <p className="text-lg font-semibold text-muted-foreground mb-2">
+            Charts not available on mobile
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Please use the desktop version to view the graphs
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Card className="w-full border shadow-sm">
