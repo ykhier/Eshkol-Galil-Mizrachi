@@ -1,10 +1,11 @@
 import {prisma} from "./prisma";
-import {GoogleGenerativeAI} from "@google/generative-ai";
+import {GoogleGenerativeAI, type EmbedContentRequest} from "@google/generative-ai";
 import {ChatMessage} from "@/types/chat";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const chatModel = genAI.getGenerativeModel({model: "gemini-2.5-flash-lite"});
-const embedModel = genAI.getGenerativeModel({model: "text-embedding-004"});
+const embedModel = genAI.getGenerativeModel({model: "gemini-embedding-001"});
+const EMBEDDING_DIMENSION = 768;
 
 export async function getAuthorityInfo(userMessage: string, history: ChatMessage[]) {
   try {
@@ -17,7 +18,11 @@ export async function getAuthorityInfo(userMessage: string, history: ChatMessage
     const finalSearchTerms = Array.from(new Set([...rawWords, ...cleanSearchTerms]));
 
     // 3. VECTORIZE (Using the global embedModel)
-    const embeddingRes = await embedModel.embedContent(userMessage);
+    const embeddingRes = await embedModel.embedContent({
+      content: {parts: [{text: userMessage}], role: "user"},
+      taskType: "RETRIEVAL_QUERY",
+      outputDimensionality: EMBEDDING_DIMENSION,
+    } as unknown as EmbedContentRequest);
     const vectorSql = `[${embeddingRes.embedding.values.join(",")}]`;
 
     // 4. HYBRID WEIGHTED QUERY

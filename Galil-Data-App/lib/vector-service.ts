@@ -1,8 +1,9 @@
-import {GoogleGenerativeAI} from "@google/generative-ai";
+import {GoogleGenerativeAI, type EmbedContentRequest} from "@google/generative-ai";
 import {PrismaClient} from "@/lib/generated/prisma/client";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const embedModel = genAI.getGenerativeModel({model: "text-embedding-004"});
+const embedModel = genAI.getGenerativeModel({model: "gemini-embedding-001"});
+const EMBEDDING_DIMENSION = 768;
 
 export async function createAndSaveEmbedding(
   prisma: PrismaClient,
@@ -64,7 +65,11 @@ export async function createAndSaveEmbedding(
   }
 
   // Generate Vector
-  const result = await embedModel.embedContent(description);
+  const result = await embedModel.embedContent({
+    content: {parts: [{text: description}], role: "user"},
+    taskType: "RETRIEVAL_DOCUMENT",
+    outputDimensionality: EMBEDDING_DIMENSION,
+  } as unknown as EmbedContentRequest);
   const vector = result.embedding.values;
   const vectorString = `[${vector.join(",")}]`;
 

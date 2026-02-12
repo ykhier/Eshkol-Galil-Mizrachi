@@ -1,9 +1,10 @@
 import {prisma} from "./prisma";
-import {GoogleGenerativeAI} from "@google/generative-ai";
+import {GoogleGenerativeAI, type EmbedContentRequest} from "@google/generative-ai";
 
 // 1. Initialize Gemini Client once (Module Level)
 // This is efficient and ensures the client is ready for all subsequent calls.
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const EMBEDDING_DIMENSION = 768;
 
 const BOT_CONFIG = {
   mission: `אתה העוזר הדיגיטלי הרשמי של "אשכול רשויות גליל מזרחי".`,
@@ -20,11 +21,15 @@ const BOT_CONFIG = {
 export async function getBotResponse(userMessage: string) {
   try {
     // 2. Initialize Models
-    const embedModel = genAI.getGenerativeModel({model: "text-embedding-004"});
+    const embedModel = genAI.getGenerativeModel({model: "gemini-embedding-001"});
     const chatModel = genAI.getGenerativeModel({model: "gemini-2.5-flash-lite"});
 
     // --- STEP 1: VECTORIZE USER QUERY ---
-    const embeddingRes = await embedModel.embedContent(userMessage);
+    const embeddingRes = await embedModel.embedContent({
+      content: {parts: [{text: userMessage}], role: "user"},
+      taskType: "RETRIEVAL_QUERY",
+      outputDimensionality: EMBEDDING_DIMENSION,
+    } as unknown as EmbedContentRequest);
     const vectorSql = `[${embeddingRes.embedding.values.join(",")}]`;
 
     // --- STEP 2: OPTIMIZED SINGLE QUERY (JOIN) ---
