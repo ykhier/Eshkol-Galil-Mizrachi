@@ -108,4 +108,30 @@ The LLM generates an answer strictly based on the retrieved context.
 
 ---
 
-# 📂 Project Structure
+# 🔐 Security
+
+- API keys stored securely in environment variables  
+- AI requests handled server-side only  
+- No client-side exposure of secrets  
+- Role-based admin authentication  
+- Production-ready environment separation  
+
+---
+
+# 🚀 Vercel Deployment
+
+This project is optimized for deployment on Vercel.
+
+## 🔧 Deployment Steps
+
+1. Push the repository to GitHub.
+2. Go to Vercel → New Project.
+3. Import your repository.
+4. Configure:
+   - Framework: Next.js
+   - Install Command: `npm install`
+   - Build Command: `npm run build`
+
+5. Add environment variables in:
+
+Vercel Dashboard → Project → Settings → Environment Variables
