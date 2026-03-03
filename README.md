@@ -3,8 +3,6 @@
 🔗 **Live Website:**  
 https://eshkol-galil-mizrachi.vercel.app
 
-[![Live Website](https://img.shields.io/badge/View-Live%20Website-22c55e?style=for-the-badge)](https://eshkol-galil-mizrachi.vercel.app)
-
 A modern full-stack data exploration platform with an integrated AI RAG-based chat assistant.
 
 Built with Next.js 14, TypeScript, Prisma, PostgreSQL, TailwindCSS, and advanced AI infrastructure.
