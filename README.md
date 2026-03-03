@@ -1,4 +1,9 @@
+
+
+
 # 🌿 Galil Data – AI Powered Municipal Data Platform
+🔗 Live Website:
+eshkol-galil-mizrachi.vercel.app
 
 A modern full-stack data exploration platform with an integrated AI RAG-based chat assistant.
 
