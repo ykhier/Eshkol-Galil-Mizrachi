@@ -1,9 +1,9 @@
+# 🌿 Galil Data – AI Powered Municipal Data Platform  
 
+🔗 **Live Website:**  
+https://eshkol-galil-mizrachi.vercel.app
 
-
-# 🌿 Galil Data – AI Powered Municipal Data Platform
-🔗 Live Website:
-eshkol-galil-mizrachi.vercel.app
+[![Live Website](https://img.shields.io/badge/View-Live%20Website-22c55e?style=for-the-badge)](https://eshkol-galil-mizrachi.vercel.app)
 
 A modern full-stack data exploration platform with an integrated AI RAG-based chat assistant.
 
@@ -32,10 +32,10 @@ The core innovation of this project is the Retrieval-Augmented Generation (RAG) 
 
 Instead of generating generic AI responses, the assistant:
 
-1. Converts the user’s question into a vector (embedding)
-2. Searches a vector database for relevant municipal data
-3. Injects structured context into the LLM prompt
-4. Generates a grounded response based strictly on retrieved data
+1. Converts the user’s question into a vector (embedding)  
+2. Searches a vector database for relevant municipal data  
+3. Injects structured context into the LLM prompt  
+4. Generates a grounded response based strictly on retrieved data  
 
 This architecture significantly reduces hallucinations and ensures reliable, data-backed answers.
 
@@ -129,14 +129,20 @@ This project is optimized for deployment on Vercel.
 
 ## 🔧 Deployment Steps
 
-1. Push the repository to GitHub.
-2. Go to Vercel → New Project.
-3. Import your repository.
+1. Push the repository to GitHub.  
+2. Go to Vercel → New Project.  
+3. Import your repository.  
 4. Configure:
-   - Framework: Next.js
-   - Install Command: `npm install`
-   - Build Command: `npm run build`
+   - Framework: Next.js  
+   - Install Command: `npm install`  
+   - Build Command: `npm run build`  
+5. Add environment variables in:  
 
-5. Add environment variables in:
+Vercel Dashboard → Project → Settings → Environment Variables  
 
-Vercel Dashboard → Project → Settings → Environment Variables
+---
+
+# 👨‍💻 Developer
+Developed by Yosef Khier,ali shawahna,gal Mitrani, revivo heno  
+
+AI-focused full-stack developer building production-grade intelligent systems.
